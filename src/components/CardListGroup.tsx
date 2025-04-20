@@ -1,12 +1,14 @@
 import { useState } from "react";
+import Card from "./Card";
+import CardModel from "../models/Card";
 
 interface Props {
-  items: string[];
+  items: CardModel[];
   heading: string;
   onSelectItem: (item: string) => void;
 }
 
-function ListGroup({ items, heading, onSelectItem }: Props) {
+function CardListGroup({ items, heading, onSelectItem }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   return (
@@ -21,13 +23,13 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
                 ? "list-group-item active"
                 : "list-group-item"
             }
-            key={item}
+            key={item.heading}
             onClick={() => {
               setSelectedIndex(index);
-              onSelectItem(item);
+              onSelectItem(item.heading);
             }}
           >
-            {item}
+            <Card heading={item.heading} image={item.image}></Card>
           </li>
         ))}
       </ul>
@@ -35,4 +37,4 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
   );
 }
 
-export default ListGroup;
+export default CardListGroup;
